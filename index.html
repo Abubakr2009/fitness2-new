@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PULSE FIT — Премиум Фитнес Клуб 24/7</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter & Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            lime: '#D4FF00',
+                            cyan: '#00E5FF',
+                            purple: '#A855F7',
+                            dark: '#0B0F17',
+                            card: 'rgba(21, 28, 44, 0.75)',
+                            border: 'rgba(255, 255, 255, 0.1)',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Glassmorphism & Neon Effects */
+        body {
+            background-color: #07090E;
+            color: #E2E8F0;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(18, 25, 38, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .glass-card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card-hover:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 255, 0, 0.4);
+            box-shadow: 0 12px 40px rgba(212, 255, 0, 0.15);
+        }
+
+        .text-glow-lime {
+            text-shadow: 0 0 15px rgba(212, 255, 0, 0.5);
+        }
+        .text-glow-cyan {
+            text-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
+        }
+
+        .btn-lime {
+            background: linear-gradient(135deg, #D4FF00 0%, #A3C900 100%);
+            color: #000000;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(212, 255, 0, 0.3);
+        }
+        .btn-lime:hover {
+            box-shadow: 0 6px 28px rgba(212, 255, 0, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .btn-cyan {
+            background: linear-gradient(135deg, #00E5FF 0%, #0099FF 100%);
+            color: #000000;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 229, 255, 0.3);
+        }
+        .btn-cyan:hover {
+            box-shadow: 0 6px 28px rgba(0, 229, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #07090E;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E293B;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4FF00;
+        }
+
+        /* Pulse Animation */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 0.4; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+        .animate-pulse-slow {
+            animation: pulse-ring 3s infinite ease-in-out;
+        }
+
+        /* Audio Visualizer Equalizer Bars */
+        .eq-bar {
+            width: 4px;
+            background: #D4FF00;
+            border-radius: 2px;
+            animation: eq-anim 1s ease-in-out infinite alternate;
+        }
+        @keyframes eq-anim {
+            0% { height: 6px; }
+            100% { height: 28px; }
+        }
+        .eq-bar:nth-child(1) { animation-delay: 0.1s; }
+        .eq-bar:nth-child(2) { animation-delay: 0.3s; }
+        .eq-bar:nth-child(3) { animation-delay: 0.2s; }
+        .eq-bar:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body class="font-sans antialiased text-slate-200">
+
+    <!-- Sticky Navigation Bar -->
+    <header id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-4 px-4 sm:px-8 border-b border-white/5">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-lime to-brand-cyan flex items-center justify-center font-display font-black text-black text-xl shadow-lg shadow-brand-lime/20 group-hover:scale-105 transition-transform">
+                    P
+                </div>
+                <div>
+                    <span class="font-display font-black text-2xl tracking-wider text-white">PULSE<span class="text-brand-lime">FIT</span></span>
+                    <span class="block text-[10px] text-slate-400 font-bold tracking-widest uppercase -mt-1">Premium Club 24/7</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-semibold text-slate-300">
+                <a href="#about" class="hover:text-brand-lime transition-colors">О клубе</a>
+                <a href="#trainers" class="hover:text-brand-lime transition-colors">Тренеры</a>
+                <a href="#pricing" class="hover:text-brand-lime transition-colors">Тарифы</a>
+                <a href="#schedule" class="hover:text-brand-lime transition-colors">Расписание</a>
+                <a href="#calculators" class="hover:text-brand-lime transition-colors">Калькуляторы</a>
+                <a href="#quiz" class="hover:text-brand-lime transition-colors">Квиз-тренер</a>
+                <a href="#gadgets" class="hover:text-brand-lime transition-colors text-brand-cyan flex items-center gap-1">
+                    <i class="fa-solid fa-bolt text-xs"></i> Фишки
+                </a>
+            </nav>
+
+            <!-- Status Indicator & CTA -->
+            <div class="hidden sm:flex items-center gap-4">
+                <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/80 border border-emerald-500/30 text-xs text-emerald-400">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span class="font-medium">Клуб открыт 24/7</span>
+                </div>
+
+                <!-- Points Widget -->
+                <button onclick="openModal('rewardsModal')" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold hover:bg-amber-500/20 transition-all">
+                    <i class="fa-solid fa-coins"></i>
+                    <span id="userPoints">350</span> PTS
+                </button>
+
+                <button onclick="openModal('guestPassModal')" class="btn-lime px-5 py-2.5 rounded-xl text-xs uppercase tracking-wider font-bold">
+                    Гостевой визит
+                </button>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobileMenuBtn" class="lg:hidden text-2xl text-slate-300 hover:text-white p-2">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden mt-4 pt-4 border-t border-slate-800 flex-col gap-4 text-center glass-card rounded-2xl p-6">
+            <a href="#about" class="mobile-link text-slate-300 hover:text-brand-lime py-1 font-medium">О клубе</a>
+            <a href="#trainers" class="mobile-link text-slate-300 hover:text-brand-lime py-1 font-medium">Тренеры</a>
+            <a href="#pricing" class="mobile-link text-slate-300 hover:text-brand-lime py-1 font-medium">Тарифы & Конфигуратор</a>
+            <a href="#schedule" class="mobile-link text-slate-300 hover:text-brand-lime py-1 font-medium">Расписание</a>
+            <a href="#calculators" class="mobile-link text-slate-300 hover:text-brand-lime py-1 font-medium">Калькуляторы</a>
+            <a href="#quiz" class="mobile-link text-slate-300 hover:text-brand-lime py-1 font-medium">Квиз-тренер</a>
+            <a href="#gadgets" class="mobile-link text-brand-cyan hover:text-white py-1 font-medium"><i class="fa-solid fa-bolt"></i> ТУЛЗЫ & ТАЙМЕР</a>
+            <div class="pt-2 flex flex-col gap-3">
+                <button onclick="openModal('guestPassModal')" class="btn-lime w-full py-3 rounded-xl text-xs uppercase font-bold">
+                    Бесплатный Гостевой Визит
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative min-h-screen pt-32 pb-20 flex items-center justify-center overflow-hidden">
+        <!-- Background Glows & Grid Pattern -->
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black -z-10"></div>
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-lime/10 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="absolute bottom-10 right-10 w-[400px] h-[400px] bg-brand-cyan/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 w-full grid lg:grid-cols-12 gap-12 items-center">
+            <!-- Left Text Content -->
+            <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-brand-lime">
+                    <span class="w-2 h-2 rounded-full bg-brand-lime animate-pulse"></span>
+                    ЭКОСИСТЕМА ТЕЛА И РАЗУМА 2026
+                </div>
+
+                <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight text-white leading-[1.05]">
+                    ПРОКАЧАЙ СВОЙ <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-lime via-emerald-400 to-brand-cyan text-glow-lime">ПУЛЬС НА 100%</span>
+                </h1>
+
+                <p class="text-slate-400 text-lg sm:text-xl max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                    Премиум фитнес-пространство площдью 3500 м² с умным биометрическим трекингом, премиальными тренажерами Technogym и авторскими программами восстановления.
+                </p>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                    <button onclick="openModal('guestPassModal')" class="btn-lime w-full sm:w-auto px-8 py-4 rounded-xl text-base uppercase font-extrabold flex items-center justify-center gap-3 group">
+                        <span>Забронировать визит</span>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                    <a href="#tour" class="glass-card hover:bg-white/10 w-full sm:w-auto px-8 py-4 rounded-xl text-base font-bold text-white flex items-center justify-center gap-3 transition-all">
+                        <i class="fa-solid fa-play text-brand-cyan"></i>
+                        3D Виртуальный Тур
+                    </a>
+                </div>
+
+                <!-- Stats Counters -->
+                <div class="pt-8 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-6 text-left">
+                    <div>
+                        <div class="font-display text-3xl sm:text-4xl font-extrabold text-brand-lime flex items-center">
+                            <span class="counter" data-target="3500">0</span><span class="text-xl ml-1">м²</span>
+                        </div>
+                        <p class="text-xs text-slate-400 uppercase font-medium mt-1">Площадь клуба</p>
+                    </div>
+                    <div>
+                        <div class="font-display text-3xl sm:text-4xl font-extrabold text-white flex items-center">
+                            <span class="counter" data-target="180">0</span><span class="text-brand-cyan text-xl ml-1">+</span>
+                        </div>
+                        <p class="text-xs text-slate-400 uppercase font-medium mt-1">Тренажеров</p>
+                    </div>
+                    <div>
+                        <div class="font-display text-3xl sm:text-4xl font-extrabold text-brand-lime flex items-center">
+                            <span class="counter" data-target="24">0</span><span class="text-xl ml-1">/7</span>
+                        </div>
+                        <p class="text-xs text-slate-400 uppercase font-medium mt-1">Доступ в клуб</p>
+                    </div>
+                    <div>
+                        <div class="font-display text-3xl sm:text-4xl font-extrabold text-white flex items-center">
+                            <span class="counter" data-target="98">0</span><span class="text-brand-cyan text-xl ml-1">%</span>
+                        </div>
+                        <p class="text-xs text-slate-400 uppercase font-medium mt-1">Довольных атлетов</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Visual Banner Card -->
+            <div class="lg:col-span-5 relative">
+                <div class="relative mx-auto max-w-md lg:max-w-none">
+                    <div class="glass-card p-4 rounded-3xl relative z-10 border border-white/10 shadow-2xl overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1000&auto=format&fit=crop" 
+                             alt="PULSE FIT Interior" 
+                             class="rounded-2xl w-full h-[450px] object-cover filter brightness-90 hover:scale-105 transition-transform duration-700">
+                        
+                        <!-- Floating Glass Tag -->
+                        <div class="absolute bottom-8 left-8 right-8 glass-card p-4 rounded-2xl border border-white/20 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-brand-lime/20 flex items-center justify-center text-brand-lime">
+                                    <i class="fa-solid fa-heart-pulse text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-400">Средний пульс на тренировке</div>
+                                    <div class="text-lg font-bold text-white">138 BPM <span class="text-emerald-400 text-xs font-normal">(-12% к стрессу)</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Glowing Decorative Orbs -->
+                    <div class="absolute -top-6 -right-6 w-32 h-32 bg-brand-lime/30 rounded-full blur-2xl"></div>
+                    <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-brand-cyan/30 rounded-full blur-2xl"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW FEATURE: Live Gym Capacity & Radar Widget -->
+    <section id="radar" class="py-12 bg-slate-950/60 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+            <div class="glass-card p-6 sm:p-8 rounded-3xl flex flex-col lg:flex-row items-center justify-between gap-8 border border-white/10">
+                <div class="flex items-center gap-5">
+                    <div class="relative">
+                        <div class="w-20 h-20 rounded-2xl bg-slate-900 flex items-center justify-center border border-slate-700">
+                            <i class="fa-solid fa-users text-3xl text-brand-lime"></i>
+                        </div>
+                        <span class="absolute -top-2 -right-2 flex h-5 w-5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-5 w-5 bg-emerald-500"></span>
+                        </span>
+                    </div>
+                    <div>
+                        <div class="text-xs font-bold text-brand-cyan tracking-widest uppercase mb-1">Live Мониторинг Зала</div>
+                        <h3 class="text-2xl font-bold text-white">Загруженность клуба прямо сейчас</h3>
+                        <p class="text-slate-400 text-sm">Обновляется автоматически каждые 30 секунд</p>
+                    </div>
+                </div>
+
+                <!-- Progress Bar & Capacity -->
+                <div class="w-full lg:w-1/3 space-y-2">
+                    <div class="flex justify-between text-sm font-bold">
+                        <span class="text-slate-300">Свободно и комфортно</span>
+                        <span id="capacityPercentText" class="text-brand-lime">38% Заполнено</span>
+                    </div>
+                    <div class="w-full h-4 bg-slate-900 rounded-full overflow-hidden border border-slate-800 p-0.5">
+                        <div id="capacityBar" class="h-full bg-gradient-to-r from-emerald-400 via-brand-lime to-amber-400 rounded-full transition-all duration-1000" style="width: 38%"></div>
+                    </div>
+                    <div class="flex justify-between text-[11px] text-slate-500 font-medium">
+                        <span>150+ свободных шкафчиков</span>
+                        <span>Пик ожидается: 19:00</span>
+                    </div>
+                </div>
+
+                <!-- Refresh Button -->
+                <button onclick="refreshCapacity()" class="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-bold text-white flex items-center gap-2 transition-all">
+                    <i class="fa-solid fa-arrows-rotate text-brand-lime" id="refreshIcon"></i>
+                    <span>Обновить радар</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Trainers -->
+    <section id="trainers" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-brand-lime font-bold text-xs uppercase tracking-widest">Команда экспертов</span>
+                <h2 class="font-display text-3xl sm:text-5xl font-black text-white">НАШИ ТРЕНЕРЫ</h2>
+                <p class="text-slate-400 text-base">Чемпионы мира, мастера спорта и сертифицированные нутрициологи ready to boost your results.</p>
+                
+                <!-- Category Filters -->
+                <div class="flex flex-wrap items-center justify-center gap-2 pt-4" id="trainerFilters">
+                    <button data-filter="all" class="filter-btn active px-5 py-2 rounded-xl text-xs font-bold transition-all bg-brand-lime text-black shadow-lg shadow-brand-lime/20">Все направления</button>
+                    <button data-filter="bodybuilding" class="filter-btn px-5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-800 text-slate-300 hover:bg-slate-700">Бодибилдинг</button>
+                    <button data-filter="crossfit" class="filter-btn px-5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-800 text-slate-300 hover:bg-slate-700">Кроссфит</button>
+                    <button data-filter="yoga" class="filter-btn px-5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-800 text-slate-300 hover:bg-slate-700">Йога & Пилатес</button>
+                    <button data-filter="fight" class="filter-btn px-5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-800 text-slate-300 hover:bg-slate-700">Единоборства</button>
+                </div>
+            </div>
+
+            <!-- Trainer Cards Grid -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8" id="trainersGrid">
+                <!-- Trainer 1 -->
+                <div class="trainer-card glass-card glass-card-hover rounded-3xl overflow-hidden group border border-white/10" data-category="bodybuilding">
+                    <div class="relative h-80 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?q=80&w=800&auto=format&fit=crop" alt="Александр Громов" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+                        <span class="absolute top-4 right-4 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-brand-lime text-[11px] font-bold border border-brand-lime/30">Опыт 10 лет</span>
+                    </div>
+                    <div class="p-6 space-y-3 relative -mt-12">
+                        <span class="text-xs font-bold text-brand-cyan tracking-wider uppercase">Бодибилдинг & Силовой тренинг</span>
+                        <h3 class="text-xl font-extrabold text-white">Александр Громов</h3>
+                        <p class="text-slate-400 text-xs line-clamp-2">Мастер спорта по бодибилдингу. Специалист по гипертрофии и сушке.</p>
+                        <div class="pt-2 flex items-center justify-between border-t border-white/10">
+                            <button onclick="openTrainerModal('gromov')" class="text-brand-lime text-xs font-bold flex items-center gap-2 hover:underline">
+                                Подробнее <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                            </button>
+                            <button onclick="bookTrainer('Александр Громов')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-brand-lime hover:text-black text-xs font-bold text-white transition-all">
+                                Записаться
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trainer 2 -->
+                <div class="trainer-card glass-card glass-card-hover rounded-3xl overflow-hidden group border border-white/10" data-category="yoga">
+                    <div class="relative h-80 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=800&auto=format&fit=crop" alt="Елена Соколова" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+                        <span class="absolute top-4 right-4 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-brand-lime text-[11px] font-bold border border-brand-lime/30">Опыт 7 лет</span>
+                    </div>
+                    <div class="p-6 space-y-3 relative -mt-12">
+                        <span class="text-xs font-bold text-purple-400 tracking-wider uppercase">Йога & Растяжка</span>
+                        <h3 class="text-xl font-extrabold text-white">Елена Соколова</h3>
+                        <p class="text-slate-400 text-xs line-clamp-2">Сертифицированный преподаватель Hatha Yoga & Pilates. Коррекция осанки.</p>
+                        <div class="pt-2 flex items-center justify-between border-t border-white/10">
+                            <button onclick="openTrainerModal('sokolova')" class="text-brand-lime text-xs font-bold flex items-center gap-2 hover:underline">
+                                Подробнее <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                            </button>
+                            <button onclick="bookTrainer('Елена Соколова')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-brand-lime hover:text-black text-xs font-bold text-white transition-all">
+                                Записаться
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trainer 3 -->
+                <div class="trainer-card glass-card glass-card-hover rounded-3xl overflow-hidden group border border-white/10" data-category="crossfit">
+                    <div class="relative h-80 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=800&auto=format&fit=crop" alt="Максим Власов" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+                        <span class="absolute top-4 right-4 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-brand-lime text-[11px] font-bold border border-brand-lime/30">Опыт 8 лет</span>
+                    </div>
+                    <div class="p-6 space-y-3 relative -mt-12">
+                        <span class="text-xs font-bold text-amber-400 tracking-wider uppercase">Кроссфит & Функционал</span>
+                        <h3 class="text-xl font-extrabold text-white">Максим Власов</h3>
+                        <p class="text-slate-400 text-xs line-clamp-2">Главный тренер Кроссфит-зоны. Призер региональных турниров CrossFit Games.</p>
+                        <div class="pt-2 flex items-center justify-between border-t border-white/10">
+                            <button onclick="openTrainerModal('vlasov')" class="text-brand-lime text-xs font-bold flex items-center gap-2 hover:underline">
+                                Подробнее <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                            </button>
+                            <button onclick="bookTrainer('Максим Власов')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-brand-lime hover:text-black text-xs font-bold text-white transition-all">
+                                Записаться
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trainer 4 -->
+                <div class="trainer-card glass-card glass-card-hover rounded-3xl overflow-hidden group border border-white/10" data-category="fight">
+                    <div class="relative h-80 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=800&auto=format&fit=crop" alt="Артем Чернов" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+                        <span class="absolute top-4 right-4 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-brand-lime text-[11px] font-bold border border-brand-lime/30">Опыт 12 лет</span>
+                    </div>
+                    <div class="p-6 space-y-3 relative -mt-12">
+                        <span class="text-xs font-bold text-red-400 tracking-wider uppercase">Бокс & Кикбоксинг</span>
+                        <h3 class="text-xl font-extrabold text-white">Артем Чернов</h3>
+                        <p class="text-slate-400 text-xs line-clamp-2">КМС по боксу, постановка удара, выносливость и жиросжигающий бойцовский тренинг.</p>
+                        <div class="pt-2 flex items-center justify-between border-t border-white/10">
+                            <button onclick="openTrainerModal('chernov')" class="text-brand-lime text-xs font-bold flex items-center gap-2 hover:underline">
+                                Подробнее <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                            </button>
+                            <button onclick="bookTrainer('Артем Чернов')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-brand-lime hover:text-black text-xs font-bold text-white transition-all">
+                                Записаться
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Pricing & Membership Configurator -->
+    <section id="pricing" class="py-24 bg-slate-950/80 relative border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-brand-lime font-bold text-xs uppercase tracking-widest">Прозрачные условия</span>
+                <h2 class="font-display text-3xl sm:text-5xl font-black text-white">ТАРИФЫ И КАРТЫ</h2>
+                <p class="text-slate-400 text-base">Выберите готовый пакет или соберите персональный абонемент под свои задачи.</p>
+
+                <!-- Month / Year Switcher -->
+                <div class="inline-flex items-center gap-3 p-1.5 rounded-2xl glass-card border border-white/10 mt-4">
+                    <span id="periodMonthLabel" class="text-sm font-bold text-brand-lime px-4 py-2">Месячный</span>
+                    <button id="billingToggle" class="w-14 h-8 bg-slate-800 rounded-full p-1 relative transition-colors focus:outline-none">
+                        <div id="toggleDot" class="w-6 h-6 bg-brand-lime rounded-full transition-transform"></div>
+                    </button>
+                    <span id="periodYearLabel" class="text-sm font-bold text-slate-400 px-4 py-2 flex items-center gap-1.5">
+                        Годовой <span class="px-2 py-0.5 rounded-full bg-brand-lime/20 text-brand-lime text-[10px] uppercase font-bold">-20%</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Tariff Cards Grid -->
+            <div class="grid md:grid-cols-3 gap-8 mb-20">
+                <!-- Tariff 1: Day -->
+                <div class="glass-card glass-card-hover p-8 rounded-3xl flex flex-col justify-between border border-white/10 relative">
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-2xl font-black text-white">ДНЕВНОЙ</h3>
+                                <p class="text-slate-400 text-xs mt-1">Доступ в клуб с 07:00 до 17:00</p>
+                            </div>
+                            <span class="p-3 rounded-2xl bg-slate-800/80 text-slate-300"><i class="fa-solid fa-sun text-xl"></i></span>
+                        </div>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-4xl font-extrabold text-white price-value" data-month="2 900" data-year="27 800">2 900</span>
+                            <span class="text-slate-400 text-sm">₽ / <span class="billing-period-text">мес</span></span>
+                        </div>
+                        <ul class="space-y-3 text-sm text-slate-300 border-t border-white/10 pt-6">
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-lime"></i> Доступ в зал до 17:00</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-lime"></i> Вводный инструктаж</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-lime"></i> Шкафчик и сейф</li>
+                            <li class="flex items-center gap-3 text-slate-600"><i class="fa-solid fa-xmark"></i> Без SPA-зоны и бассейнов</li>
+                        </ul>
+                    </div>
+                    <button onclick="selectTariff('Дневной')" class="w-full mt-8 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider transition-all">
+                        Оформить абонемент
+                    </button>
+                </div>
+
+                <!-- Tariff 2: VIP (Featured) -->
+                <div class="glass-card glass-card-hover p-8 rounded-3xl flex flex-col justify-between border-2 border-brand-lime relative bg-gradient-to-b from-brand-lime/10 to-transparent">
+                    <span class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-brand-lime text-black font-extrabold text-[11px] uppercase tracking-wider shadow-lg shadow-brand-lime/30">
+                        ХИТ ПРОДАЖ ★
+                    </span>
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-2xl font-black text-white">ALL INCLUSIVE VIP</h3>
+                                <p class="text-slate-400 text-xs mt-1">Безлимит 24/7 + Все сервисы</p>
+                            </div>
+                            <span class="p-3 rounded-2xl bg-brand-lime text-black"><i class="fa-solid fa-crown text-xl"></i></span>
+                        </div>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-4xl font-extrabold text-brand-lime price-value" data-month="5 900" data-year="56 600">5 900</span>
+                            <span class="text-slate-400 text-sm">₽ / <span class="billing-period-text">мес</span></span>
+                        </div>
+                        <ul class="space-y-3 text-sm text-slate-300 border-t border-white/10 pt-6">
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-lime"></i> Безлимитный доступ 24/7</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-lime"></i> SPA, Финская сауна, Хаммам</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-lime"></i> Все групповые программы</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-lime"></i> 2 тренировки с тренером</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-lime"></i> Заморозка карт до 30 дней</li>
+                        </ul>
+                    </div>
+                    <button onclick="selectTariff('VIP All Inclusive')" class="btn-lime w-full mt-8 py-3.5 rounded-xl text-xs uppercase font-extrabold">
+                        Вступить в VIP Клуб
+                    </button>
+                </div>
+
+                <!-- Tariff 3: Family / Team -->
+                <div class="glass-card glass-card-hover p-8 rounded-3xl flex flex-col justify-between border border-white/10 relative">
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-2xl font-black text-white">СЕМЕЙНЫЙ</h3>
+                                <p class="text-slate-400 text-xs mt-1">Карта на 2 человека (24/7)</p>
+                            </div>
+                            <span class="p-3 rounded-2xl bg-slate-800/80 text-slate-300"><i class="fa-solid fa-people-group text-xl"></i></span>
+                        </div>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-4xl font-extrabold text-white price-value" data-month="8 900" data-year="85 400">8 900</span>
+                            <span class="text-slate-400 text-sm">₽ / <span class="billing-period-text">мес</span></span>
+                        </div>
+                        <ul class="space-y-3 text-sm text-slate-300 border-t border-white/10 pt-6">
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-lime"></i> Доступ для 2 взрослых</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-lime"></i> Детская фитнес-комната</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-lime"></i> Безлимитное посещение SPA</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-lime"></i> Гостевые визиты друзьям (4/мес)</li>
+                        </ul>
+                    </div>
+                    <button onclick="selectTariff('Семейный')" class="w-full mt-8 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider transition-all">
+                        Оформить семейную карту
+                    </button>
+                </div>
+            </div>
+
+            <!-- INTERACTIVE BUILDER: "Собери свой абонемент" -->
+            <div class="glass-card p-8 sm:p-12 rounded-3xl border border-brand-lime/20 relative overflow-hidden">
+                <div class="grid lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-7 space-y-6">
+                        <span class="text-brand-lime font-bold text-xs uppercase tracking-widest"><i class="fa-solid fa-sliders"></i> Интерактивный конструктор</span>
+                        <h3 class="text-2xl sm:text-4xl font-black text-white">СОБЕРИ СВОЙ ИДЕАЛЬНЫЙ АБОНЕМЕНТ</h3>
+                        <p class="text-slate-400 text-sm">Платите только за те опции, которыми действительно будете пользоваться.</p>
+
+                        <div class="space-y-4 pt-2">
+                            <!-- Duration Range -->
+                            <div>
+                                <div class="flex justify-between text-xs font-bold text-slate-300 mb-2">
+                                    <span>Длительность:</span>
+                                    <span id="builderMonthsText" class="text-brand-lime">6 месяцев</span>
+                                </div>
+                                <input type="range" id="builderMonths" min="1" max="12" value="6" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-brand-lime">
+                            </div>
+
+                            <!-- Options Checklist -->
+                            <div class="grid sm:grid-cols-2 gap-3 pt-2">
+                                <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800 cursor-pointer hover:border-brand-lime transition-colors">
+                                    <input type="checkbox" id="optSpa" class="w-4 h-4 accent-brand-lime" checked>
+                                    <span class="text-xs font-bold text-slate-200">SPA & Финская сауна (+1500 ₽/мес)</span>
+                                </label>
+                                <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800 cursor-pointer hover:border-brand-lime transition-colors">
+                                    <input type="checkbox" id="optTrainer" class="w-4 h-4 accent-brand-lime">
+                                    <span class="text-xs font-bold text-slate-200">4 Тренировки с тренером (+4000 ₽/мес)</span>
+                                </label>
+                                <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800 cursor-pointer hover:border-brand-lime transition-colors">
+                                    <input type="checkbox" id="optFreeze" class="w-4 h-4 accent-brand-lime" checked>
+                                    <span class="text-xs font-bold text-slate-200">Заморозка до 30 дней (+500 ₽/мес)</span>
+                                </label>
+                                <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800 cursor-pointer hover:border-brand-lime transition-colors">
+                                    <input type="checkbox" id="optDrinks" class="w-4 h-4 accent-brand-lime">
+                                    <span class="text-xs font-bold text-slate-200">Фитнес-бар Безлимит (+2000 ₽/мес)</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Builder Result Box -->
+                    <div class="lg:col-span-5 glass-card p-6 rounded-2xl border border-white/10 flex flex-col items-center text-center space-y-4">
+                        <span class="text-xs text-slate-400 uppercase tracking-widest font-bold">Рассчитанная стоимость</span>
+                        <div class="text-4xl sm:text-5xl font-black text-brand-lime">
+                            <span id="calculatedPrice">3 450</span> <span class="text-xl text-white">₽/мес</span>
+                        </div>
+                        <p class="text-xs text-slate-400">Итоговая сумма за весь период: <span id="totalContractPrice" class="text-white font-bold">20 700 ₽</span></p>
+                        <button onclick="orderCustomCard()" class="btn-lime w-full py-3.5 rounded-xl text-xs uppercase font-extrabold shadow-lg shadow-brand-lime/20">
+                            Заказать кастомный абонемент
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW FEATURE: Interactive HIIT Timer & Audio Beats Player -->
+    <section id="gadgets" class="py-20 bg-slate-900/50 relative border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <span class="text-brand-cyan font-bold text-xs uppercase tracking-widest"><i class="fa-solid fa-bolt"></i> Тулзы для тренировок</span>
+                <h2 class="font-display text-3xl sm:text-5xl font-black text-white">HIIT ТАЙМЕР & РИТМ ПЛЕЕР</h2>
+                <p class="text-slate-400 text-sm">Используйте наш встроенный табата-таймер и мотивирующий фитнес-звук прямо в зале.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 items-stretch">
+                <!-- HIIT Timer Box -->
+                <div class="glass-card p-8 rounded-3xl border border-white/10 flex flex-col items-center justify-between space-y-6 text-center">
+                    <div class="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest">
+                        <i class="fa-solid fa-stopwatch text-brand-lime"></i> Табата / HIIT Секундомер
+                    </div>
+
+                    <!-- Circular Countdown Display -->
+                    <div class="relative w-56 h-56 flex items-center justify-center">
+                        <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="6" class="text-slate-800" fill="transparent" />
+                            <circle id="timerProgressCircle" cx="50" cy="50" r="42" stroke="currentColor" stroke-width="6" class="text-brand-lime transition-all duration-300" stroke-dasharray="264" stroke-dashoffset="0" stroke-linecap="round" fill="transparent" />
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <span id="timerPhaseText" class="text-xs uppercase font-extrabold text-emerald-400 tracking-wider">РАБОТА</span>
+                            <span id="timerDisplay" class="font-display text-5xl font-black text-white">00:20</span>
+                            <span id="timerCycleText" class="text-[11px] text-slate-400 font-medium">Раунд 1 / 8</span>
+                        </div>
+                    </div>
+
+                    <!-- Timer Controls -->
+                    <div class="flex items-center gap-4 w-full max-w-xs">
+                        <button onclick="toggleTimer()" id="timerStartBtn" class="btn-lime flex-1 py-3 rounded-xl text-xs uppercase font-extrabold flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-play"></i> Сварт
+                        </button>
+                        <button onclick="resetTimer()" class="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold">
+                            <i class="fa-solid fa-rotate-left"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Fitness Beats Audio Player Widget -->
+                <div class="glass-card p-8 rounded-3xl border border-white/10 flex flex-col justify-between space-y-6">
+                    <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-2xl bg-brand-cyan/20 flex items-center justify-center text-brand-cyan">
+                                <i class="fa-solid fa-music text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-white">Pulse Beats Player</h4>
+                                <p class="text-xs text-slate-400">Фоновый аудио-ритм для мотивации</p>
+                            </div>
+                        </div>
+                        <!-- Visualizer Animation -->
+                        <div class="flex items-end gap-1 h-8 px-3 py-1 bg-slate-900 rounded-lg">
+                            <div class="eq-bar"></div>
+                            <div class="eq-bar"></div>
+                            <div class="eq-bar"></div>
+                            <div class="eq-bar"></div>
+                        </div>
+                    </div>
+
+                    <!-- Track Selector list -->
+                    <div class="space-y-2">
+                        <button onclick="selectBeatTrack('synthwave')" class="beat-track-btn w-full p-3 rounded-xl bg-slate-900/80 border border-brand-cyan flex items-center justify-between text-xs text-left">
+                            <span class="font-bold text-white"><i class="fa-solid fa-drum text-brand-cyan mr-2"></i> Cyberpunk Synth Beat 128 BPM</span>
+                            <span class="text-slate-400">Кардио</span>
+                        </button>
+                        <button onclick="selectBeatTrack('metal')" class="beat-track-btn w-full p-3 rounded-xl bg-slate-900/40 border border-slate-800 hover:border-slate-700 flex items-center justify-between text-xs text-left">
+                            <span class="font-bold text-slate-300"><i class="fa-solid fa-dumbbell text-slate-400 mr-2"></i> Heavy Power Metal Riff</span>
+                            <span class="text-slate-400">Качалка</span>
+                        </button>
+                        <button onclick="selectBeatTrack('yoga')" class="beat-track-btn w-full p-3 rounded-xl bg-slate-900/40 border border-slate-800 hover:border-slate-700 flex items-center justify-between text-xs text-left">
+                            <span class="font-bold text-slate-300"><i class="fa-solid fa-spa text-slate-400 mr-2"></i> Deep Relax Ambient</span>
+                            <span class="text-slate-400">Йога / Заминка</span>
+                        </button>
+                    </div>
+
+                    <!-- Audio Controls -->
+                    <div class="flex items-center justify-between pt-2">
+                        <button onclick="toggleAudioBeat()" id="audioPlayBtn" class="btn-cyan px-6 py-3 rounded-xl text-xs uppercase font-extrabold flex items-center gap-2">
+                            <i class="fa-solid fa-play"></i> Играть ритм
+                        </button>
+                        <div class="text-xs text-slate-400">Сгенерировано синтезом WebAudio API</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Fitness Calculators (BMI + BMR + Heart Rate Zones) -->
+    <section id="calculators" class="py-24 relative border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 space-y-16">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <span class="text-brand-lime font-bold text-xs uppercase tracking-widest">Анализ тела & Пульса</span>
+                <h2 class="font-display text-3xl sm:text-5xl font-black text-white">ФИТНЕС-КАЛЬКУЛЯТОРЫ</h2>
+                <p class="text-slate-400 text-base">Точный расчет ИМТ, суточной нормы калорий и пульсовых зон нагрузки.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Calculator 1: BMI & Calories -->
+                <div class="glass-card p-8 rounded-3xl border border-white/10 space-y-6">
+                    <h3 class="text-2xl font-black text-white flex items-center gap-3">
+                        <i class="fa-solid fa-calculator text-brand-lime"></i> ИМТ & Калории (BMR)
+                    </h3>
+
+                    <form id="bmiForm" class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 mb-1">Пол</label>
+                                <select id="calcGender" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white focus:border-brand-lime focus:outline-none">
+                                    <option value="male">Мужской</option>
+                                    <option value="female">Женский</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 mb-1">Возраст (лет)</label>
+                                <input type="number" id="calcAge" value="25" min="14" max="90" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white focus:border-brand-lime focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 mb-1">Рост (см)</label>
+                                <input type="number" id="calcHeight" value="178" min="120" max="220" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white focus:border-brand-lime focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 mb-1">Вес (кг)</label>
+                                <input type="number" id="calcWeight" value="75" min="30" max="200" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white focus:border-brand-lime focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 mb-1">Уровень активности</label>
+                            <select id="calcActivity" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white focus:border-brand-lime focus:outline-none">
+                                <option value="1.2">Сидячий образ жизни</option>
+                                <option value="1.375">Легкая активность (1-3 трен/нед)</option>
+                                <option value="1.55" selected>Умеренная (3-5 трен/нед)</option>
+                                <option value="1.725">Высокая (6-7 трен/нед)</option>
+                            </select>
+                        </div>
+
+                        <button type="button" onclick="calculateBmiBmr()" class="btn-lime w-full py-3.5 rounded-xl text-xs uppercase font-extrabold mt-4">
+                            Рассчитать показатели
+                        </button>
+                    </form>
+
+                    <!-- Calculator Output -->
+                    <div id="calcResults" class="p-6 rounded-2xl bg-slate-900/80 border border-white/10 grid grid-cols-2 gap-4 text-center">
+                        <div>
+                            <div class="text-xs text-slate-400">Индекс массы тела</div>
+                            <div id="resBMI" class="text-3xl font-black text-brand-lime mt-1">23.7</div>
+                            <div id="resBMILabel" class="text-[11px] text-emerald-400 font-bold mt-1">Нормальный вес</div>
+                        </div>
+                        <div>
+                            <div class="text-xs text-slate-400">Суточная норма</div>
+                            <div id="resCalories" class="text-3xl font-black text-white mt-1">2 450</div>
+                            <div class="text-[11px] text-slate-400 font-bold mt-1">ккал / день</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculator 2: Heart Rate Zones (Karvonen Method) -->
+                <div class="glass-card p-8 rounded-3xl border border-white/10 space-y-6">
+                    <h3 class="text-2xl font-black text-white flex items-center gap-3">
+                        <i class="fa-solid fa-heart-pulse text-brand-cyan"></i> Калькулятор Пульсовых Зон
+                    </h3>
+
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 mb-1">Возраст</label>
+                                <input type="number" id="hrAge" value="28" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 mb-1">Пульс покоя (BPM)</label>
+                                <input type="number" id="hrRest" value="65" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white">
+                            </div>
+                        </div>
+
+                        <button onclick="calculateHeartRateZones()" class="btn-cyan w-full py-3.5 rounded-xl text-xs uppercase font-extrabold">
+                            Расчитать зоны пульса
+                        </button>
+                    </div>
+
+                    <!-- Heart Rate Zones Output list -->
+                    <div class="space-y-2.5 pt-2" id="hrZonesList">
+                        <div class="p-3 rounded-xl bg-slate-900/80 border border-emerald-500/30 flex justify-between items-center text-xs">
+                            <span class="font-bold text-emerald-400">🔥 Сжигание жира (60-70%)</span>
+                            <span class="font-mono font-bold text-white" id="zoneFatBurn">135 - 148 BPM</span>
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-900/80 border border-brand-cyan/30 flex justify-between items-center text-xs">
+                            <span class="font-bold text-brand-cyan">🏃 Аэробная / Выносливость (70-80%)</span>
+                            <span class="font-mono font-bold text-white" id="zoneAerobic">148 - 162 BPM</span>
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-900/80 border border-amber-500/30 flex justify-between items-center text-xs">
+                            <span class="font-bold text-amber-400">⚡ Анаэробная силовая (80-90%)</span>
+                            <span class="font-mono font-bold text-white" id="zoneAnaerobic">162 - 175 BPM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Schedule -->
+    <section id="schedule" class="py-24 bg-slate-950 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <span class="text-brand-lime font-bold text-xs uppercase tracking-widest">Интерактивный календарь</span>
+                <h2 class="font-display text-3xl sm:text-5xl font-black text-white">РАСПИСАНИЕ ЗАНЯТИЙ</h2>
+                <p class="text-slate-400 text-sm">Выберите удобный день и забронируйте место в группе заранее.</p>
+
+                <!-- Day Tabs -->
+                <div class="flex flex-wrap items-center justify-center gap-2 pt-4" id="dayTabs">
+                    <button data-day="mon" class="day-tab active px-5 py-2.5 rounded-xl text-xs font-bold bg-brand-lime text-black">ПН</button>
+                    <button data-day="tue" class="day-tab px-5 py-2.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700">ВТ</button>
+                    <button data-day="wed" class="day-tab px-5 py-2.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700">СР</button>
+                    <button data-day="thu" class="day-tab px-5 py-2.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700">ЧТ</button>
+                    <button data-day="fri" class="day-tab px-5 py-2.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700">ПТ</button>
+                    <button data-day="sat" class="day-tab px-5 py-2.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700">СБ</button>
+                </div>
+            </div>
+
+            <!-- Schedule Classes Container -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="scheduleContainer">
+                <!-- Class items will be rendered by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Workout Plan Generator / Quiz -->
+    <section id="quiz" class="py-24 relative border-t border-white/5">
+        <div class="max-w-5xl mx-auto px-4 sm:px-8">
+            <div class="glass-card p-8 sm:p-12 rounded-3xl border border-white/10 relative overflow-hidden">
+                <div class="text-center max-w-2xl mx-auto mb-10 space-y-3">
+                    <span class="text-brand-lime font-bold text-xs uppercase tracking-widest"><i class="fa-solid fa-wand-magic-sparkles"></i> Умный алгоритм</span>
+                    <h2 class="font-display text-3xl sm:text-4xl font-black text-white">ГЕНЕРАТОР ТРЕНИРОВОК</h2>
+                    <p class="text-slate-400 text-xs sm:text-sm">Ответьте на 3 вопроса и получите бесплатную персональную программу на неделю.</p>
+                </div>
+
+                <!-- Quiz Form Step Wizard -->
+                <div id="quizWizard" class="space-y-8 max-w-xl mx-auto">
+                    <!-- Step 1 -->
+                    <div class="quiz-step space-y-4" data-step="1">
+                        <div class="text-xs font-bold text-brand-lime uppercase">Шаг 1 из 3: Какая ваша главная цель?</div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <button type="button" onclick="selectQuizOption('goal', 'weight_loss')" class="quiz-opt-btn p-4 rounded-2xl bg-slate-900 border border-slate-800 text-left hover:border-brand-lime transition-all">
+                                <i class="fa-solid fa-fire text-brand-lime text-2xl mb-2 block"></i>
+                                <div class="font-bold text-white text-sm">Снижение веса</div>
+                                <div class="text-[11px] text-slate-400 mt-1">Жиросжигание</div>
+                            </button>
+                            <button type="button" onclick="selectQuizOption('goal', 'muscle')" class="quiz-opt-btn p-4 rounded-2xl bg-slate-900 border border-slate-800 text-left hover:border-brand-lime transition-all">
+                                <i class="fa-solid fa-dumbbell text-brand-cyan text-2xl mb-2 block"></i>
+                                <div class="font-bold text-white text-sm">Набор массы</div>
+                                <div class="text-[11px] text-slate-400 mt-1">Гипертрофия</div>
+                            </button>
+                            <button type="button" onclick="selectQuizOption('goal', 'endurance')" class="quiz-opt-btn p-4 rounded-2xl bg-slate-900 border border-slate-800 text-left hover:border-brand-lime transition-all">
+                                <i class="fa-solid fa-heart-pulse text-purple-400 text-2xl mb-2 block"></i>
+                                <div class="font-bold text-white text-sm">Выносливость</div>
+                                <div class="text-[11px] text-slate-400 mt-1">Тонус & Кардио</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="quiz-step hidden space-y-4" data-step="2">
+                        <div class="text-xs font-bold text-brand-lime uppercase">Шаг 2 из 3: Ваш тренировочный опыт?</div>
+                        <div class="grid grid-cols-3 gap-3">
+                            <button type="button" onclick="selectQuizOption('experience', 'beginner')" class="quiz-opt-btn p-4 rounded-2xl bg-slate-900 border border-slate-800 text-center hover:border-brand-lime transition-all">
+                                <div class="font-bold text-white text-sm">Новичок</div>
+                                <div class="text-[10px] text-slate-400 mt-1">0-6 месяцев</div>
+                            </button>
+                            <button type="button" onclick="selectQuizOption('experience', 'medium')" class="quiz-opt-btn p-4 rounded-2xl bg-slate-900 border border-slate-800 text-center hover:border-brand-lime transition-all">
+                                <div class="font-bold text-white text-sm">Любитель</div>
+                                <div class="text-[10px] text-slate-400 mt-1">1-2 года</div>
+                            </button>
+                            <button type="button" onclick="selectQuizOption('experience', 'pro')" class="quiz-opt-btn p-4 rounded-2xl bg-slate-900 border border-slate-800 text-center hover:border-brand-lime transition-all">
+                                <div class="font-bold text-white text-sm">Продвинутый</div>
+                                <div class="text-[10px] text-slate-400 mt-1">3+ года</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="quiz-step hidden space-y-4" data-step="3">
+                        <div class="text-xs font-bold text-brand-lime uppercase">Шаг 3 из 3: Сколько дней в неделю?</div>
+                        <div class="grid grid-cols-3 gap-3">
+                            <button type="button" onclick="finishQuiz(2)" class="p-4 rounded-2xl bg-slate-900 border border-slate-800 text-center hover:border-brand-lime transition-all text-white font-bold">2 Дня</button>
+                            <button type="button" onclick="finishQuiz(3)" class="p-4 rounded-2xl bg-slate-900 border border-slate-800 text-center hover:border-brand-lime transition-all text-white font-bold">3 Дня</button>
+                            <button type="button" onclick="finishQuiz(4)" class="p-4 rounded-2xl bg-slate-900 border border-slate-800 text-center hover:border-brand-lime transition-all text-white font-bold">4+ Дней</button>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Result Display -->
+                    <div id="quizResultBox" class="hidden p-6 rounded-2xl bg-slate-900 border border-brand-lime/30 space-y-4">
+                        <div class="flex justify-between items-center border-b border-white/10 pb-3">
+                            <span class="text-sm font-bold text-brand-lime">Готовый план сгенерирован!</span>
+                            <span class="text-xs text-slate-400">PULSE AI Program</span>
+                        </div>
+                        <div id="quizPlanOutput" class="text-xs text-slate-300 leading-relaxed space-y-2">
+                            <!-- JS Inject Plan -->
+                        </div>
+                        <button onclick="downloadWorkoutPlan()" class="btn-lime w-full py-3 rounded-xl text-xs uppercase font-extrabold flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-download"></i> Сохранить программу
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal: Rewards Store & Daily Check-in -->
+    <div id="rewardsModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-card max-w-lg w-full p-8 rounded-3xl border border-white/10 space-y-6 relative">
+            <button onclick="closeModal('rewardsModal')" class="absolute top-6 right-6 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <div class="text-center space-y-2">
+                <span class="text-amber-400 font-bold text-xs uppercase tracking-widest"><i class="fa-solid fa-crown"></i> PULSE REWARDS</span>
+                <h3 class="text-2xl font-black text-white">Магазин Очков & Бонусов</h3>
+                <p class="text-slate-400 text-xs">Зарабатывайте Pulse Points за посещения и упражнения.</p>
+            </div>
+
+            <!-- Daily Checkin Widget -->
+            <div class="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between">
+                <div>
+                    <div class="text-xs font-bold text-amber-400">Ежедневный Чекин</div>
+                    <div class="text-xs text-slate-300">+50 PTS за отметку сегодня</div>
+                </div>
+                <button onclick="claimDailyCheckin()" id="checkinBtn" class="px-4 py-2 rounded-xl bg-amber-500 text-black font-extrabold text-xs hover:bg-amber-400 transition-all">
+                    Отметиться
+                </button>
+            </div>
+
+            <!-- Rewards Catalog -->
+            <div class="space-y-3 pt-2">
+                <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex justify-between items-center text-xs">
+                    <div>
+                        <div class="font-bold text-white">Протеиновый Коктейль</div>
+                        <div class="text-slate-400 text-[10px]">Любой вкус в фитнес-баре</div>
+                    </div>
+                    <button onclick="redeemReward('Коктейль', 200)" class="px-3 py-1.5 rounded-lg bg-slate-800 text-brand-lime font-bold hover:bg-brand-lime hover:text-black transition-all">200 PTS</button>
+                </div>
+                <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex justify-between items-center text-xs">
+                    <div>
+                        <div class="font-bold text-white">1 Персональная тренировка</div>
+                        <div class="text-slate-400 text-[10px]">С любым топ-тренером</div>
+                    </div>
+                    <button onclick="redeemReward('Тренировка', 800)" class="px-3 py-1.5 rounded-lg bg-slate-800 text-brand-lime font-bold hover:bg-brand-lime hover:text-black transition-all">800 PTS</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Guest Pass Booking -->
+    <div id="guestPassModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-card max-w-md w-full p-8 rounded-3xl border border-white/10 space-y-6 relative">
+            <button onclick="closeModal('guestPassModal')" class="absolute top-6 right-6 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <div class="text-center space-y-2">
+                <span class="text-brand-lime font-bold text-xs uppercase tracking-widest">Бесплатный вход</span>
+                <h3 class="text-2xl font-black text-white">ГОСТЕВОЙ ВИЗИТ</h3>
+                <p class="text-slate-400 text-xs">Заполните форму, и мы забронируем ваш первый бесплотный день в PULSE FIT.</p>
+            </div>
+
+            <form id="guestPassForm" onsubmit="submitGuestPass(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">Ваше Имя</label>
+                    <input type="text" required placeholder="Александр" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white focus:border-brand-lime focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">Номер телефона</label>
+                    <input type="tel" required placeholder="+7 (999) 000-00-00" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white focus:border-brand-lime focus:outline-none">
+                </div>
+                <button type="submit" class="btn-lime w-full py-3.5 rounded-xl text-xs uppercase font-extrabold">
+                    Получить приглашение
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="fixed bottom-6 right-6 z-50 space-y-3 pointer-events-none"></div>
+
+    <script>
+        // Global State
+        let userPoints = 350;
+        let isCheckedIn = false;
+        let timerInterval = null;
+        let timerSeconds = 20;
+        let timerPhase = 'work'; // 'work' or 'rest'
+        let isTimerRunning = false;
+        let audioCtx = null;
+        let currentBeat = null;
+
+        // On DOM Loaded Initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            initCounters();
+            renderSchedule('mon');
+            calculateBmiBmr();
+            calculateHeartRateZones();
+            setupEventListeners();
+        });
+
+        // Event Listeners Setup
+        function setupEventListeners() {
+            // Billing toggle
+            const billingToggle = document.getElementById('billingToggle');
+            let isYearly = false;
+            
+            billingToggle.addEventListener('click', () => {
+                isYearly = !isYearly;
+                document.getElementById('toggleDot').style.transform = isYearly ? 'translateX(24px)' : 'translateX(0)';
+                
+                document.querySelectorAll('.price-value').forEach(el => {
+                    el.textContent = isYearly ? el.dataset.year : el.dataset.month;
+                });
+                document.querySelectorAll('.billing-period-text').forEach(el => {
+                    el.textContent = isYearly ? 'год' : 'мес';
+                });
+            });
+
+            // Builder inputs
+            document.getElementById('builderMonths').addEventListener('input', (e) => {
+                document.getElementById('builderMonthsText').textContent = `${e.target.value} месяцев`;
+                recalculateBuilder();
+            });
+            ['optSpa', 'optTrainer', 'optFreeze', 'optDrinks'].forEach(id => {
+                document.getElementById(id).addEventListener('change', recalculateBuilder);
+            });
+
+            // Mobile menu toggle
+            document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+                const menu = document.getElementById('mobileMenu');
+                menu.classList.toggle('hidden');
+                menu.classList.toggle('flex');
+            });
+
+            // Day schedule tabs
+            document.querySelectorAll('.day-tab').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.day-tab').forEach(b => {
+                        b.classList.remove('bg-brand-lime', 'text-black', 'active');
+                        b.classList.add('bg-slate-800', 'text-slate-300');
+                    });
+                    e.target.classList.remove('bg-slate-800', 'text-slate-300');
+                    e.target.classList.add('bg-brand-lime', 'text-black', 'active');
+                    renderSchedule(e.target.dataset.day);
+                });
+            });
+
+            // Trainer filters
+            document.querySelectorAll('#trainerFilters .filter-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('#trainerFilters .filter-btn').forEach(b => {
+                        b.classList.remove('bg-brand-lime', 'text-black');
+                        b.classList.add('bg-slate-800', 'text-slate-300');
+                    });
+                    e.target.classList.remove('bg-slate-800', 'text-slate-300');
+                    e.target.classList.add('bg-brand-lime', 'text-black');
+                    
+                    const cat = e.target.dataset.filter;
+                    document.querySelectorAll('.trainer-card').forEach(card => {
+                        if(cat === 'all' || card.dataset.category === cat) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        }
+
+        // Live Capacity Simulation
+        function refreshCapacity() {
+            const icon = document.getElementById('refreshIcon');
+            icon.classList.add('animate-spin');
+            setTimeout(() => {
+                icon.classList.remove('animate-spin');
+                const randomCap = Math.floor(Math.random() * 35) + 25; // 25% - 60%
+                document.getElementById('capacityPercentText').textContent = `${randomCap}% Заполнено`;
+                document.getElementById('capacityBar').style.width = `${randomCap}%`;
+                showToast(`Загруженность зала обновлена: ${randomCap}%`, 'info');
+            }, 600);
+        }
+
+        // Animated Counters
+        function initCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                let count = 0;
+                const speed = target / 50;
+                const update = () => {
+                    count += speed;
+                    if(count < target) {
+                        counter.innerText = Math.ceil(count);
+                        setTimeout(update, 20);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                update();
+            });
+        }
+
+        // Builder Price Recalculation
+        function recalculateBuilder() {
+            const months = parseInt(document.getElementById('builderMonths').value);
+            let base = 2000;
+            if(document.getElementById('optSpa').checked) base += 1500;
+            if(document.getElementById('optTrainer').checked) base += 4000;
+            if(document.getElementById('optFreeze').checked) base += 500;
+            if(document.getElementById('optDrinks').checked) base += 2000;
+
+            const total = base * months;
+            document.getElementById('calculatedPrice').textContent = base.toLocaleString('ru-RU');
+            document.getElementById('totalContractPrice').textContent = `${total.toLocaleString('ru-RU')} ₽`;
+        }
+
+        // BMI & BMR Calculator
+        function calculateBmiBmr() {
+            const h = parseFloat(document.getElementById('calcHeight').value) / 100;
+            const w = parseFloat(document.getElementById('calcWeight').value);
+            const age = parseInt(document.getElementById('calcAge').value);
+            const gender = document.getElementById('calcGender').value;
+            const act = parseFloat(document.getElementById('calcActivity').value);
+
+            if(!h || !w) return;
+
+            const bmi = (w / (h * h)).toFixed(1);
+            document.getElementById('resBMI').textContent = bmi;
+
+            let bmiLabel = 'Нормальный вес';
+            if(bmi < 18.5) bmiLabel = 'Дефицит массы';
+            else if(bmi >= 25 && bmi < 30) bmiLabel = 'Избыточный вес';
+            else if(bmi >= 30) bmiLabel = 'Ожирение';
+            document.getElementById('resBMILabel').textContent = bmiLabel;
+
+            // BMR
+            let bmr = (10 * w) + (6.25 * (h * 100)) - (5 * age);
+            bmr = gender === 'male' ? bmr + 5 : bmr - 161;
+            const calories = Math.round(bmr * act);
+            document.getElementById('resCalories').textContent = calories.toLocaleString('ru-RU');
+        }
+
+        // Heart Rate Zone Calculator (Karvonen)
+        function calculateHeartRateZones() {
+            const age = parseInt(document.getElementById('hrAge').value) || 28;
+            const rest = parseInt(document.getElementById('hrRest').value) || 65;
+            const maxHR = 220 - age;
+            const hrr = maxHR - rest; // Heart rate reserve
+
+            const fatBurnMin = Math.round(rest + (hrr * 0.6));
+            const fatBurnMax = Math.round(rest + (hrr * 0.7));
+            const aeroMin = Math.round(rest + (hrr * 0.7));
+            const aeroMax = Math.round(rest + (hrr * 0.8));
+            const anaeroMin = Math.round(rest + (hrr * 0.8));
+            const anaeroMax = Math.round(rest + (hrr * 0.9));
+
+            document.getElementById('zoneFatBurn').textContent = `${fatBurnMin} - ${fatBurnMax} BPM`;
+            document.getElementById('zoneAerobic').textContent = `${aeroMin} - ${aeroMax} BPM`;
+            document.getElementById('zoneAnaerobic').textContent = `${anaeroMin} - ${anaeroMax} BPM`;
+        }
+
+        // HIIT Timer Logic
+        function toggleTimer() {
+            const btn = document.getElementById('timerStartBtn');
+            if(isTimerRunning) {
+                clearInterval(timerInterval);
+                isTimerRunning = false;
+                btn.innerHTML = '<i class="fa-solid fa-play"></i> Старт';
+            } else {
+                isTimerRunning = true;
+                btn.innerHTML = '<i class="fa-solid fa-pause"></i> Пауза';
+                timerInterval = setInterval(() => {
+                    timerSeconds--;
+                    if(timerSeconds <= 0) {
+                        playBeepSound(1000, 0.3);
+                        if(timerPhase === 'work') {
+                            timerPhase = 'rest';
+                            timerSeconds = 10;
+                            document.getElementById('timerPhaseText').textContent = 'ОТДЫХ';
+                            document.getElementById('timerPhaseText').className = 'text-xs uppercase font-extrabold text-brand-cyan tracking-wider';
+                        } else {
+                            timerPhase = 'work';
+                            timerSeconds = 20;
+                            document.getElementById('timerPhaseText').textContent = 'РАБОТА';
+                            document.getElementById('timerPhaseText').className = 'text-xs uppercase font-extrabold text-emerald-400 tracking-wider';
+                        }
+                    }
+                    updateTimerUI();
+                }, 1000);
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            isTimerRunning = false;
+            timerSeconds = 20;
+            timerPhase = 'work';
+            document.getElementById('timerStartBtn').innerHTML = '<i class="fa-solid fa-play"></i> Старт';
+            document.getElementById('timerPhaseText').textContent = 'РАБОТА';
+            updateTimerUI();
+        }
+
+        function updateTimerUI() {
+            const secStr = timerSeconds < 10 ? `0${timerSeconds}` : timerSeconds;
+            document.getElementById('timerDisplay').textContent = `00:${secStr}`;
+        }
+
+        // Web Audio Synthesizer Beep
+        function playBeepSound(freq = 800, duration = 0.15) {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, ctx.currentTime);
+                gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + duration);
+            } catch(e) {}
+        }
+
+        // Web Audio Beat Synth Player
+        function toggleAudioBeat() {
+            const btn = document.getElementById('audioPlayBtn');
+            if(currentBeat) {
+                clearInterval(currentBeat);
+                currentBeat = null;
+                btn.innerHTML = '<i class="fa-solid fa-play"></i> Играть ритм';
+                showToast('Воспроизведение остановлено', 'info');
+            } else {
+                btn.innerHTML = '<i class="fa-solid fa-stop"></i> Стоп';
+                showToast('Запущен фитнес-ритм (128 BPM)', 'success');
+                currentBeat = setInterval(() => {
+                    playBeepSound(150, 0.08); // Synth Bass Kick
+                }, 468); // 128 BPM interval
+            }
+        }
+
+        function selectBeatTrack(type) {
+            showToast(`Выбран трек: ${type.toUpperCase()}`, 'info');
+        }
+
+        // Schedule Renderer
+        const scheduleData = {
+            mon: [
+                { time: '08:00', title: 'Morning Crossfit', trainer: 'Максим Власов', spot: '3 места' },
+                { time: '12:00', title: 'Hatha Yoga', trainer: 'Елена Соколова', spot: '5 мест' },
+                { time: '19:00', title: 'Boxing Power', trainer: 'Артем Чернов', spot: '1 место' }
+            ],
+            tue: [
+                { time: '09:00', title: 'Pilates Reformer', trainer: 'Елена Соколова', spot: '4 места' },
+                { time: '18:30', title: 'Bodybuilding Heavy', trainer: 'Александр Громов', spot: 'Заполнено' }
+            ],
+            wed: [
+                { time: '10:00', title: 'TRX Suspension', trainer: 'Максим Власов', spot: '6 мест' },
+                { time: '20:00', title: 'Kickboxing Night', trainer: 'Артем Чернов', spot: '2 места' }
+            ],
+            thu: [
+                { time: '08:30', title: 'Power Yoga', trainer: 'Елена Соколова', spot: '4 места' },
+                { time: '19:00', title: 'CrossFit WOD', trainer: 'Максим Власов', spot: '3 места' }
+            ],
+            fri: [
+                { time: '11:00', title: 'Pump & Tone', trainer: 'Александр Громов', spot: '5 мест' },
+                { time: '18:00', title: 'Fight Club Sparring', trainer: 'Артем Чернов', spot: 'Заполнено' }
+            ],
+            sat: [
+                { time: '11:00', title: 'Weekend FullBody', trainer: 'Максим Власов', spot: '8 мест' }
+            ]
+        };
+
+        function renderSchedule(day) {
+            const container = document.getElementById('scheduleContainer');
+            container.innerHTML = '';
+            const list = scheduleData[day] || [];
+            list.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'glass-card p-6 rounded-2xl border border-white/10 flex items-center justify-between';
+                card.innerHTML = `
+                    <div class="space-y-1">
+                        <span class="text-xs font-bold text-brand-lime">${item.time}</span>
+                        <h4 class="text-lg font-black text-white">${item.title}</h4>
+                        <div class="text-xs text-slate-400">Тренер: ${item.trainer}</div>
+                    </div>
+                    <div class="text-right space-y-2">
+                        <span class="text-[10px] font-bold px-2.5 py-1 rounded-full ${item.spot === 'Заполнено' ? 'bg-red-500/20 text-red-400' : 'bg-emerald-500/20 text-emerald-400'}">${item.spot}</span>
+                        <button onclick="bookClass('${item.title}')" class="block text-xs font-bold text-brand-cyan hover:underline">Записаться →</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Quiz Generator Logic
+        let quizAnswers = {};
+        function selectQuizOption(key, val) {
+            quizAnswers[key] = val;
+            const wizard = document.getElementById('quizWizard');
+            const step1 = wizard.querySelector('[data-step="1"]');
+            const step2 = wizard.querySelector('[data-step="2"]');
+            const step3 = wizard.querySelector('[data-step="3"]');
+
+            if(key === 'goal') {
+                step1.classList.add('hidden');
+                step2.classList.remove('hidden');
+            } else if(key === 'experience') {
+                step2.classList.add('hidden');
+                step3.classList.remove('hidden');
+            }
+        }
+
+        function finishQuiz(days) {
+            quizAnswers.days = days;
+            document.querySelector('[data-step="3"]').classList.add('hidden');
+            document.getElementById('quizResultBox').classList.remove('hidden');
+
+            const out = document.getElementById('quizPlanOutput');
+            out.innerHTML = `
+                <p>• <b>День 1:</b> Базовые тяжелые жимы + Плечи (3 подхода x 10 повторов)</p>
+                <p>• <b>День 2:</b> Приседания, Задняя поверхность бедра + Пресс</p>
+                <p>• <b>День 3:</b> Тяга блока, Бицепс/Трицепс + 20 мин Кардио в целевой пульсовой зоне</p>
+                <p class="text-brand-lime pt-2">Рекомендуемая норма белка: 1.8г на 1 кг веса.</p>
+            `;
+            showToast('Персональная программа готова!', 'success');
+        }
+
+        function downloadWorkoutPlan() {
+            showToast('План сохранен в вашу квитанцию!', 'success');
+        }
+
+        // Gamification Rewards
+        function claimDailyCheckin() {
+            if(isCheckedIn) return;
+            isCheckedIn = true;
+            userPoints += 50;
+            document.getElementById('userPoints').textContent = userPoints;
+            const btn = document.getElementById('checkinBtn');
+            btn.textContent = 'Выполнено ✓';
+            btn.className = 'px-4 py-2 rounded-xl bg-slate-800 text-slate-500 font-bold text-xs cursor-not-allowed';
+            showToast('Вам начислено +50 PTS!', 'success');
+        }
+
+        function redeemReward(name, cost) {
+            if(userPoints < cost) {
+                showToast('Недостаточно очков!', 'error');
+                return;
+            }
+            userPoints -= cost;
+            document.getElementById('userPoints').textContent = userPoints;
+            showToast(`Награда "${name}" активирована!`, 'success');
+        }
+
+        // Modal Helpers
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        function submitGuestPass(e) {
+            e.preventDefault();
+            closeModal('guestPassModal');
+            showToast('Заявка принята! Менеджер свяжется с вами.', 'success');
+        }
+
+        function bookClass(title) {
+            showToast(`Запись на "${title}" подтверждена!`, 'success');
+        }
+
+        function selectTariff(name) {
+            showToast(`Выбран тариф: ${name}`, 'info');
+            openModal('guestPassModal');
+        }
+
+        function bookTrainer(name) {
+            showToast(`Заявка к тренеру ${name} отправлена!`, 'success');
+        }
+
+        function orderCustomCard() {
+            showToast('Кастомный абонемент сформирован!', 'success');
+        }
+
+        // Toast Notification Helper
+        function showToast(msg, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            
+            let border = 'border-brand-lime';
+            if(type === 'error') border = 'border-red-500';
+            if(type === 'success') border = 'border-emerald-400';
+
+            toast.className = `glass-card pointer-events-auto px-5 py-3 rounded-2xl border ${border} text-xs font-bold text-white shadow-2xl flex items-center gap-3 animate-bounce`;
+            toast.innerHTML = `<i class="fa-solid fa-circle-info text-brand-lime"></i> <span>${msg}</span>`;
+            
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.remove();
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
